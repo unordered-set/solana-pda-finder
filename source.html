@@ -12,6 +12,7 @@
 <p><label>Seed: <input type="text" id="seed" placeholder="[[0x20, 0x61, 0x51]]"/></label></p>
 <p><button id="find-btn">Find</button></p>
 <p id="result"></p>
+<p id="donate" style="display: none">Please, donate to <i>Bib4QKQthsf4pto2RCnmgbJXeyaws1RPTxYuUUkcin4S</i> or stake to ValiDAO validator.</p>
 <script>
     document.getElementById('find-btn').addEventListener('click', async ()=>{
         const programID = document.getElementById("program-id").value;
@@ -19,6 +20,7 @@
         const PublicKey = window.solanaWeb3.PublicKey;
         const [pda, bump] = await PublicKey.findProgramAddress(seed, new PublicKey(programID));
         document.getElementById("result").innerText = `PDA: ${pda.toBase58()}, bump=${bump}`;
+        document.getElementById("donate").style.display = "block";
     });
 </script>
 </body>
