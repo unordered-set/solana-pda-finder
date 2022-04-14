@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SOLANA::PDA finder</title>
+    
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+</head>
+<body>
+<p><label>ProgramID: <input type="text" id="program-id" placeholder="TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"/></label></p>
+<p><label>Seed: <input type="text" id="seed" placeholder="[[0x20, 0x61, 0x51]]"/></label></p>
+<p><button id="find-btn">Find</button></p>
+<p id="result"></p>
+<script>
+    document.getElementById('find-btn').addEventListener('click', async ()=>{
+        const programID = document.getElementById("program-id").value;
+        const seed = eval(document.getElementById("seed").value);
+        const PublicKey = window.solanaWeb3.PublicKey;
+        const [pda, bump] = await PublicKey.findProgramAddress(seed, new PublicKey(programID));
+        document.getElementById("result").innerText = `PDA: ${pda.toBase58()}, bump=${bump}`;
+    });
+</script>
+</body>
